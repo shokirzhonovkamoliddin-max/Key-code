@@ -1,22 +1,42 @@
-const big = document.getElementById("big");
-const title = document.getElementById("title");
+var listsDiv = document.getElementById("lists");
+var btn = document.getElementById("newListBtn");
 
-const key = document.getElementById("key");
-const locationel = document.getElementById("location");
-const codeel = document.getElementById("code");
-const whichel = document.getElementById("which");
+btn.onclick = function () {
+  var container = document.createElement("div");
+  container.className = "list";
 
-window.addEventListener("keydown", (e) => {
+  var input = document.createElement("input");
+  input.placeholder = "Vazifa yoz...";
 
-big.innerHTML = e.keyCode;
+  var addBtn = document.createElement("button");
+  addBtn.textContent = "Qo‘shish";
 
-title.innerHTML = "JavaScript Key Code " + e.keyCode;
+  var ul = document.createElement("ul");
 
-key.innerHTML = e.key;
-codeel.innerHTML = e.code;
-whichel.innerHTML = e.which;
-locationel.innerHTML = "General keys";
-if (e.location === 0) locationel.innerHTML = "General keys";
-if (e.location === 3) locationel.innerHTML = "Numpad";
+  addBtn.onclick = function () {
+    if (input.value === "") return;
 
-});
+    var li = document.createElementB("li");
+    li.textContent = input.value;
+
+    li.onclick = function () {
+      li.style.textDecoration = "line-through";
+    };
+
+    ul.appendChild(li);
+    input.value = "";
+  };
+
+  // ENTER ishlasin
+  input.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      addBtn.click();
+    }
+  });
+
+  container.appendChild(input);
+  container.appendChild(addBtn);
+  container.appendChild(ul);
+
+  listsDiv.appendChild(container);
+};
